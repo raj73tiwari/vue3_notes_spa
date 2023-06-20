@@ -4,6 +4,7 @@ import { ref } from "vue";
 
 const isModal = ref(false)
 const trigger = () => {
+  newNote.value=''
   if (isModal.value) {
     isModal.value = false
   }
@@ -12,12 +13,7 @@ const trigger = () => {
   }
 }
 
-const newNote = ref("Type here !")
-const firstClk = () => { 
-  if (newNote.value == "Type here !") { 
-    newNote.value = "" } 
-  }
-
+const newNote = ref("")
 
 const notes=ref([])
 const addNote=()=>{
@@ -27,7 +23,7 @@ const addNote=()=>{
   }
   notes.value.push(note)
   trigger()
-  newNote.value='Type here !'
+  newNote.value=''
 
 }
 
@@ -39,7 +35,7 @@ const addNote=()=>{
 
     <div class="overlay" v-if="isModal">
       <div class="modal">
-        <textarea name="note-card" id="note-card" cols="60" rows="10" v-model="newNote" @focus="firstClk"> </textarea>
+        <textarea name="note-card" id="note-card" cols="60" rows="10" v-model="newNote" placeholder="Enter your text here !"> </textarea>
         <div class="btn-row">
           <button @click="addNote">+</button>
           <button style="background-color: red;" @click="trigger">x</button>
@@ -187,6 +183,10 @@ textarea {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(56, 48, 48);
 }
 </style>
 
